@@ -273,6 +273,16 @@ def disable_flow(request: FlowIdentifier):
 @app.post("/flows/delete")
 def delete_flow(request: FlowIdentifier):
     try:
+        # Step 1 — disable first to stop any active triggers
+        client.flows.disable_flows_by_ids(
+            tenant=KESTRA_TENANT,
+            id_with_namespace=[{"id": request.flow_id, "namespace": request.namespace}]
+        )
+    except Exception:
+        pass  # already disabled or not found, continue to delete anyway
+
+    try:
+        # Step 2 — now delete
         api_response = client.flows.delete_flows_by_ids(
             tenant=KESTRA_TENANT,
             id_with_namespace=[{"id": request.flow_id, "namespace": request.namespace}]
@@ -280,7 +290,7 @@ def delete_flow(request: FlowIdentifier):
         return {"status": "flow_deleted", "flow": api_response}
     except Exception as e:
         handle_kestra_exception(e, context="delete")
-
+        
 
 @app.post("/executions")
 def create_execution(request: FlowIdentifier):
