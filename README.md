@@ -10,10 +10,10 @@ Create a `.env` file in the project root with the following variables:
 
 | Variable | Description | Example |
 |---|---|---|
-| `KESTRA_HOST` | Kestra server URL with port | `http://34.166.177.253:8080` |
+| `KESTRA_HOST` | Kestra server URL with port | `IP` |
 | `KESTRA_USERNAME` | Kestra login username | `admin` |
 | `KESTRA_PASSWORD` | Kestra login password | `yourpassword` |
-| `AIRBYTE_HOST` | Airbyte internal service URL | `http://airbyte-airbyte-server-svc.airbyte.svc.cluster.local:8001` |
+| `AIRBYTE_HOST` | Airbyte internal service URL | `IP` |
 | `AIRBYTE_USERNAME` | Airbyte login username | `airbyte` |
 | `AIRBYTE_PASSWORD` | Airbyte login password | `yourpassword` |
 
